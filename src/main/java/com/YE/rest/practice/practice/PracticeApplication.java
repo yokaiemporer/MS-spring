@@ -5,11 +5,12 @@ import java.util.Locale;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @SpringBootApplication
+@ComponentScan(basePackages= {"com.YE.rest.practice.practice","com.YE.rest.practice.practice.HW",
+		"com.YE.rest.practice.practice.user","Exception","filtering"})
 public class PracticeApplication {
 
 	public static void main(String[] args) {
