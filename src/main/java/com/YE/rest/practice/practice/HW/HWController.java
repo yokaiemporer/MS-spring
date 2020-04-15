@@ -3,6 +3,7 @@ package com.YE.rest.practice.practice.HW;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,9 +33,9 @@ public class HWController {
 		return new HWBean("Hello World"+name);
 	}
 	@GetMapping(path="/hweighteen")
-	public String helloWorldI18n(@RequestHeader(name="Accept-Language",required=false) Locale locale)
+	public String helloWorldI18n()
 	{
-		return messageSource.getMessage("good.morning.message", null,locale);
+		return messageSource.getMessage("good.morning.message", null,LocaleContextHolder.getLocale());
 	}
 	
 	
