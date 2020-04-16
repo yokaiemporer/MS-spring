@@ -1,5 +1,7 @@
 package com.YE.rest.practice.practice.user;
 
+import java.util.Optional;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,6 +34,10 @@ public class Post {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public void setUser(User user2) {
+		this.user=user2;
+		
 	}
 	
 }

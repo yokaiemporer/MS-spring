@@ -31,6 +31,8 @@ public class UserJPAResource{
 	UserDaoService service;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private PostRepository postRepository;
 	
 	@GetMapping("/jpa/users")
 	public List<User> retrieveAllUsers()
@@ -79,6 +81,23 @@ public class UserJPAResource{
 		if(!user.isPresent())
 			throw new UserNotFoundException("id-"+id);
 		return user.get().getPosts();
+	}
+	@PostMapping(path="/jpa/users/{id}/posts")
+	public ResponseEntity<Object> CreatePost(@PathVariable("id") int id,@RequestBody Post post)
+	{
+		Optional<User> user=userRepository.findById(id);
+		if(!user.isPresent())
+			throw new UserNotFoundException("id-"+id);
+		post.setUser(user.get());
+		postRepository.save(post);
+		
+		URI location=ServletUriComponentsBuilder//used to get current request/route information
+				.fromCurrentRequest()  //get current request info
+				.path("/{id") //append id to it
+				.buildAndExpand(post.getId())//replace id with current user to it 
+				.toUri();
+		return ResponseEntity.created(location).build();
+		//best to status as result
 	}
 
 }
