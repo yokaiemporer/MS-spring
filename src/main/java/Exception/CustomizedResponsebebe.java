@@ -28,7 +28,7 @@ public class CustomizedResponsebebe extends ResponseEntityExceptionHandler {
 	public final ResponseEntity<Object> handleUserNotFoundExceptions(UserNotFoundException ex,WebRequest wr)
 	{
 		ExceptionResponse resp= new ExceptionResponse(new Date(),ex.getMessage(),wr.getDescription(false));
-		return new ResponseEntity<Object>(resp,HttpStatus.INTERNAL_SERVER_ERROR);	
+		return new ResponseEntity<Object>(resp,HttpStatus.NOT_FOUND);	
 	}
 	@Override
 	public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException me,HttpHeaders headers,HttpStatus status,WebRequest request)
