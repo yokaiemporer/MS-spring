@@ -1,15 +1,17 @@
 package com.YE.rest.practice.practice.user;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
- import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
- import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 //import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -68,6 +70,15 @@ public class UserJPAResource{
 	{
 		userRepository.deleteById(id);
 		
+	}
+	
+	@GetMapping("/jpa/users/{id}/posts")
+	public List<Post> retrieveAllUserPosts(@PathVariable("id") int id)
+	{
+		Optional<User> user=userRepository.findById(id);
+		if(!user.isPresent())
+			throw new UserNotFoundException("id-"+id);
+		return user.get().getPosts();
 	}
 
 }

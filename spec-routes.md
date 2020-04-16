@@ -13,3 +13,6 @@ always use single quotes instead of double in .sql file
 
 link:  localhost:8080/h2-console
 jdbc-url:  jdbc:h2:mem:testdb
+
+
+add foreign key and config with many to one and one to many relationships
